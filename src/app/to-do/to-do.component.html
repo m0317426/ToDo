@@ -1,1 +1,29 @@
 <p>to-do works!</p>
+
+<h2>ToDo list</h2>
+
+<!-- Als er todo items zijn (todos array lengte is groter dan 0) loop door de todos array en geef voor elk item het titel atribuut weer. 
+Als er geen items zijn is er een informatieve tekst. 
+ngIf directive voor de if conditie / ngFor directive om door de array te loopen. -->
+<ng-container *ngIf="todos.length > 0; else elseBlock">
+  <ul *ngFor="let todo of todos">
+    <li>
+     <!--  Using angular mat : <mat-checkbox></mat-checkbox>
+      Doc: https://material.angular.io/components/checkbox/overview 
+      Also import {MatCheckboxModule} from '@angular/material/checkbox' in app.modules ts"; 
+      MatCheckbox uses also a theme that arranges the color change on checked event.
+      Theme file can be found in "custom-theme.scss" -->
+      <mat-checkbox #{{todo.id}} labelPosition="after"  (click)="toDoChecked(todo)" >{{todo.titel}}</mat-checkbox>
+
+      <!-- THis a way to create a checkbox
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" + additional atributes >
+        <label >{{todo.titel}}</label>
+      </div> -->
+    </li> 
+  </ul>
+</ng-container>
+
+<ng-template #elseBlock>
+  <h3>Je hebt alle taken voltooid! Relax, tijd voor een fris pintje.</h3>
+</ng-template>
